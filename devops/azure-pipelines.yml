@@ -12,11 +12,9 @@ stages:
   - job: AwsArtifact
     displayName: Build AWS Artifact
     steps:
-    - task: PublishBuildArtifacts@1
-      displayName: 'Publish Terraform Artifact'
-      inputs:
-        PathtoPublish: 'aws'
-        ArtifactName: aws-artifact
+    - template: /devops/templates/publish-artifact.yml
+      parameters:                               
+        providerName: 'aws'  
 
   # - job: AzureArtifact
   #   displayName: Build Azure Artifact
