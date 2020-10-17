@@ -1,4 +1,4 @@
-name: Terraform demo
+name: Terraform demo-$(Build.BuildId
 
 trigger: 
   branches:
