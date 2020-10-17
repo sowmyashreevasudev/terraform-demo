@@ -32,6 +32,9 @@ stages:
           backendAWSBucketName: 'hybrid-demo'
           backendAWSKey: 'tf/terraform.tfstate'        
 
-      - template: /devops/templates/terraform-plan.yml
-        parameters:                               
-          cloudProvider: 'aws'
+      - task: TerraformTaskV1@0
+        inputs:
+          provider: 'aws'
+          command: 'plan'
+          workingDirectory: 'aws'
+          environmentServiceNameAWS: 'aws-service-connection'
