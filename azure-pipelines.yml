@@ -1,0 +1,37 @@
+name: Terraform demo
+
+trigger: 
+  branches:
+    include:
+    - master
+
+stages:
+- stage: BuildArtifact
+  displayName: Build Artifact
+  jobs:
+  - job: AwsArtifact
+    displayName: Build AWS Artifact
+    steps:
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Terraform Artifact'
+      inputs:
+        PathtoPublish: '/aws'
+        ArtifactName: aws-artifact
+
+  - job: AzureArtifact
+    displayName: Build Azure Artifact
+    steps:
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Terraform Artifact'
+      inputs:
+        PathtoPublish: '/azure'
+        ArtifactName: azure-artifact
+
+  - job: GcpArtifact
+    displayName: Build GCP Artifact
+    steps:
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish Terraform Artifact'
+      inputs:
+        PathtoPublish: '/gcp'
+        ArtifactName: gcp-artifact        
