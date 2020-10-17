@@ -52,7 +52,7 @@ stages:
       enabled: true
       inputs:
         provider: 'aws'
-        command: 'plan'
+        command: 'apply'
         workingDirectory: 'aws'
         environmentServiceNameAWS: 'aws-service-connection'
 
@@ -61,6 +61,6 @@ stages:
       enabled: false
       inputs:
         provider: 'aws'
-        command: 'plan'
+        command: 'destroy'
         workingDirectory: 'aws'
         environmentServiceNameAWS: 'aws-service-connection'
