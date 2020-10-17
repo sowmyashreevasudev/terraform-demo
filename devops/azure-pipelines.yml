@@ -22,6 +22,16 @@ stages:
     - job: AwsArtifact
       displayName: Build AWS Artifact
       steps:
+      - task: TerraformTaskV1@0
+        displayName: Terraform init
+        inputs:
+          provider: 'aws'
+          command: 'init'
+          workingDirectory: 'aws'
+          backendServiceAWS: 'aws-service-connection'
+          backendAWSBucketName: 'hybrid-demo'
+          backendAWSKey: 'tf/terraform.tfstate'        
+
       - template: /devops/templates/terraform-plan.yml
         parameters:                               
           cloudProvider: 'aws'
