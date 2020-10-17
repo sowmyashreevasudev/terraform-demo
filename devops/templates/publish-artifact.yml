@@ -4,7 +4,7 @@ parameters:
 
 steps:
 - task: PublishBuildArtifacts@1
-    displayName: 'Publish Terraform Artifact'
-    inputs:
+  displayName: 'Publish Terraform Artifact'
+  inputs:
     PathtoPublish: '${{ parameters.providerName }}'
     ArtifactName: ${{ parameters.providerName }}-artifact
