@@ -1,0 +1,5 @@
+subscription_id      = "e3d2d88d-b54a-4fb7-b918-3cb24aad9ba9"
+resource_group_name  = "MVSResGrp"
+storage_account_name = "remotestatefile"
+container_name       = "tstate"
+key                  = "terraform.tfstate"
