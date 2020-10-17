@@ -6,7 +6,7 @@ trigger:
     - master
 
 stages:
-  
+
 - stage: TerraformInit
   displayName: Terraform Init
   jobs:
@@ -29,6 +29,7 @@ stages:
   - job: TerraformPlan
     displayName: Terraform Plan
     steps:
+    - checkout: self
     - task: TerraformTaskV1@0
       inputs:
         provider: 'aws'
