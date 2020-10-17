@@ -6,35 +6,32 @@ trigger:
     - master
 
 stages:
-# - stage: BuildArtifact
-#   displayName: Build Artifact
-#   jobs:
-#   - job: AwsArtifact
-#     displayName: Build AWS Artifact
-#     steps:
-#     - template: /devops/templates/publish-artifact.yml
-#       parameters:                               
-#         cloudProvider: 'aws'  
+  
+- stage: TerraformInit
+  displayName: Terraform Init
+  jobs:
+  - job: TerraformInit
+    displayName: Terraform Init
+    steps:
+    - task: TerraformTaskV1@0
+      displayName: Terraform init
+      inputs:
+        provider: 'aws'
+        command: 'init'
+        workingDirectory: 'aws'
+        backendServiceAWS: 'aws-service-connection'
+        backendAWSBucketName: 'hybrid-demo'
+        backendAWSKey: 'tf/terraform.tfstate'        
 
 - stage: TerraformPlan
   displayName: Terraform Plan
   jobs:
-    - job: AwsArtifact
-      displayName: Build AWS Artifact
-      steps:
-      - task: TerraformTaskV1@0
-        displayName: Terraform init
-        inputs:
-          provider: 'aws'
-          command: 'init'
-          workingDirectory: 'aws'
-          backendServiceAWS: 'aws-service-connection'
-          backendAWSBucketName: 'hybrid-demo'
-          backendAWSKey: 'tf/terraform.tfstate'        
-
-      - task: TerraformTaskV1@0
-        inputs:
-          provider: 'aws'
-          command: 'plan'
-          workingDirectory: 'aws'
-          environmentServiceNameAWS: 'aws-service-connection'
+  - job: TerraformPlan
+    displayName: Terraform Plan
+    steps:
+    - task: TerraformTaskV1@0
+      inputs:
+        provider: 'aws'
+        command: 'plan'
+        workingDirectory: 'aws'
+        environmentServiceNameAWS: 'aws-service-connection'
