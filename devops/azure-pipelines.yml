@@ -1,4 +1,4 @@
-name: Terraform demo-$(Build.BuildId
+name: Terraform demo-$(Build.BuildId)
 
 trigger: 
   branches:
@@ -6,30 +6,22 @@ trigger:
     - master
 
 stages:
-- stage: BuildArtifact
-  displayName: Build Artifact
+# - stage: BuildArtifact
+#   displayName: Build Artifact
+#   jobs:
+#   - job: AwsArtifact
+#     displayName: Build AWS Artifact
+#     steps:
+#     - template: /devops/templates/publish-artifact.yml
+#       parameters:                               
+#         cloudProvider: 'aws'  
+
+- stage: TerraformPlan
+  displayName: Terraform Plan
   jobs:
-  - job: AwsArtifact
-    displayName: Build AWS Artifact
-    steps:
-    - template: /devops/templates/publish-artifact.yml
-      parameters:                               
-        providerName: 'aws'  
-
-  # - job: AzureArtifact
-  #   displayName: Build Azure Artifact
-  #   steps:
-  #   - task: PublishBuildArtifacts@1
-  #     displayName: 'Publish Terraform Artifact'
-  #     inputs:
-  #       PathtoPublish: 'azure'
-  #       ArtifactName: azure-artifact
-
-  # - job: GcpArtifact
-  #   displayName: Build GCP Artifact
-  #   steps:
-  #   - task: PublishBuildArtifacts@1
-  #     displayName: 'Publish Terraform Artifact'
-  #     inputs:
-  #       PathtoPublish: 'gcp'
-  #       ArtifactName: gcp-artifact        
+    - job: AwsArtifact
+      displayName: Build AWS Artifact
+      steps:
+      - template: /devops/templates/terraform-plan.yml
+        parameters:                               
+          cloudProvider: 'aws'
